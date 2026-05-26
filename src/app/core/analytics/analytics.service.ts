@@ -50,7 +50,7 @@ export class AnalyticsService {
         accountType,
         segment,
         platform: 'web',
-        appVersion: '14.3.4',
+        appVersion: '15.0.0',
       });
     });
   }

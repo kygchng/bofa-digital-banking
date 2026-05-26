@@ -51,7 +51,7 @@ export class SsoService {
         employeeId,
         password,
         clientId: 'digital-banking-web',
-        clientVersion: '14.3.4',
+        clientVersion: '15.0.0',
       })
       .pipe(
         catchError(err =>
@@ -99,7 +99,7 @@ export class SsoService {
     const token = this.currentToken$.getValue();
     return new HttpHeaders({
       Authorization: `Bearer ${token?.accessToken ?? ''}`,
-      'X-BofA-Client': 'digital-banking-web/14.3.4',
+      'X-BofA-Client': 'digital-banking-web/15.0.0',
       'X-BofA-Request-Id': crypto.randomUUID(),
     });
   }
