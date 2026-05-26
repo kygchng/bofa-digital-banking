@@ -1,0 +1,30 @@
+.account-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+.account-card {
+  .balance-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 4px 0;
+
+    &.secondary {
+      color: rgba(0, 0, 0, 0.54);
+      font-size: 14px;
+    }
+  }
+
+  .balance-amount {
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  .pending-note {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 13px;
+    margin-top: 8px;
+  }
+}

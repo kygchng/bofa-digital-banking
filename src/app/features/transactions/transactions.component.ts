@@ -19,7 +19,7 @@ export interface Transaction {
   accountId: string;
 }
 
-type TransactionFilter = 'all' | 'debit' | 'credit' | 'pending';
+export type TransactionFilter = 'all' | 'debit' | 'credit' | 'pending';
 
 @Component({
   selector: 'bofa-transactions',
@@ -33,6 +33,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   isLoading = true;
   errorMessage: string | null = null;
   activeFilter: TransactionFilter = 'all';
+  filterOptions: TransactionFilter[] = ['all', 'debit', 'credit', 'pending'];
 
   private destroy$ = new Subject<void>();
 
