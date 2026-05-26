@@ -1,0 +1,72 @@
+// BofA Design System — Global Styles v1.4
+// Angular Material theming with BofA brand palette
+// NOTE: This uses the pre-MDC Angular Material theming API (Angular Material 14).
+// Migration to MDC-based theming APIs required as part of Angular 15 upgrade.
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// BofA brand colors
+// Primary: Deep Red #E31837  |  Secondary: Navy Blue #012169
+$bofa-primary: mat.define-palette(mat.$red-palette, 800, 600, 900);
+$bofa-accent:  mat.define-palette(mat.$indigo-palette, 900, 700, 900);
+$bofa-warn:    mat.define-palette(mat.$red-palette);
+
+$bofa-theme: mat.define-light-theme((
+  color: (
+    primary: $bofa-primary,
+    accent:  $bofa-accent,
+    warn:    $bofa-warn,
+  ),
+  typography: mat.define-typography-config(
+    $font-family: 'Roboto, "Helvetica Neue", sans-serif',
+  ),
+  density: 0,
+));
+
+@include mat.all-component-themes($bofa-theme);
+
+// Global reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+// Layout utility
+.bofa-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+// Typography helpers
+.page-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #012169;
+  margin-bottom: 24px;
+}
+
+// Card spacing
+.mat-card + .mat-card {
+  margin-top: 16px;
+}
+
+// Full-width form fields
+.full-width {
+  width: 100%;
+}

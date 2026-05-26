@@ -1,0 +1,23 @@
+<div class="bofa-data-table-container">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="primary"></mat-progress-bar>
+
+  <mat-table [dataSource]="tableDataSource" class="bofa-data-table">
+    <ng-container *ngFor="let col of columns" [matColumnDef]="col.key">
+      <mat-header-cell *matHeaderCellDef [class]="'col-' + col.key">
+        {{ col.header }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" [class]="'col-' + col.key">
+        {{ getCellValue(row, col) }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: stickyHeader"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell no-data-cell" [attr.colspan]="displayedColumns.length">
+        <span *ngIf="!isLoading">{{ emptyMessage }}</span>
+      </td>
+    </tr>
+  </mat-table>
+</div>

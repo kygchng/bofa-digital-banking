@@ -1,0 +1,17 @@
+<div
+  *ngIf="!dismissed"
+  class="bofa-alert-banner"
+  [class]="'bofa-alert-banner--' + type"
+  role="alert"
+  [attr.aria-live]="type === 'error' ? 'assertive' : 'polite'">
+  <mat-icon class="bofa-alert-icon">{{ iconName }}</mat-icon>
+  <span class="bofa-alert-message">{{ message }}</span>
+  <button
+    *ngIf="dismissible"
+    mat-icon-button
+    class="bofa-alert-dismiss"
+    (click)="dismiss()"
+    aria-label="Dismiss alert">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>

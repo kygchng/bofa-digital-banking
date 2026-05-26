@@ -1,0 +1,44 @@
+<div class="bofa-container">
+  <h1 class="page-title">Account Overview</h1>
+
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="primary"></mat-progress-bar>
+
+  <bofa-alert-banner
+    *ngIf="errorMessage"
+    type="error"
+    [message]="errorMessage">
+  </bofa-alert-banner>
+
+  <div class="account-grid" *ngIf="!isLoading && !errorMessage">
+    <mat-card *ngFor="let account of accounts" class="account-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>{{ getAccountIcon(account.accountType) }}</mat-icon>
+        <mat-card-title>{{ account.nickname || (account.accountType | titlecase) }}</mat-card-title>
+        <mat-card-subtitle>••••&nbsp;{{ account.accountNumber.slice(-4) }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="balance-row">
+          <span class="balance-label">Current Balance</span>
+          <span class="balance-amount">{{ formatCurrency(account.balance) }}</span>
+        </div>
+        <div class="balance-row secondary">
+          <span class="balance-label">Available</span>
+          <span class="balance-amount">{{ formatCurrency(account.availableBalance) }}</span>
+        </div>
+        <p class="pending-note" *ngIf="account.pendingTransactions > 0">
+          {{ account.pendingTransactions }} pending transaction(s)
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <bofa-button variant="ghost" [routerLink]="['/transactions']" size="sm">
+          View Transactions
+        </bofa-button>
+        <bofa-button variant="primary" size="sm">
+          Transfer
+        </bofa-button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

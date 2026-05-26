@@ -1,0 +1,83 @@
+<div class="bofa-container">
+  <h1 class="page-title">Transaction History</h1>
+
+  <div class="toolbar-row">
+    <!--
+      MIGRATION NOTE: appearance="legacy" is used here per BofA Design System v1.4.
+      This appearance value was removed in Angular Material 15 (MDC migration).
+      Must be updated to appearance="outline" or "fill" as part of Angular 15 upgrade.
+      Affects: this template and all usages within @bofa/ui-components.
+      Reference: https://material.angular.io/guide/mdc-migration
+    -->
+    <mat-form-field appearance="legacy" class="search-field">
+      <mat-label>Search transactions</mat-label>
+      <input
+        matInput
+        [formControl]="searchControl"
+        placeholder="Description, merchant, category…"
+        autocomplete="off" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-chip-list class="filter-chips" aria-label="Transaction filter">
+      <mat-chip
+        *ngFor="let f of ['all', 'debit', 'credit', 'pending']"
+        [selected]="activeFilter === f"
+        (click)="applyFilter(f)"
+        color="primary">
+        {{ f | titlecase }}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
+  <bofa-alert-banner *ngIf="errorMessage" type="error" [message]="errorMessage">
+  </bofa-alert-banner>
+
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+  <mat-table [dataSource]="dataSource" class="transactions-table" *ngIf="!isLoading">
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.date | date: 'MMM d, y' }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span class="description">{{ row.merchantName || row.description }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-chip color="accent" [disableRipple]="true" class="category-chip">
+          {{ row.category }}
+        </mat-chip>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+      <mat-cell *matCellDef="let row" [class.debit]="row.type === 'debit'" [class.credit]="row.type === 'credit'">
+        {{ formatAmount(row.amount, row.type) }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span [class]="getStatusClass(row.status)">{{ row.status | titlecase }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
+        No transactions match your search.
+      </td>
+    </tr>
+  </mat-table>
+</div>

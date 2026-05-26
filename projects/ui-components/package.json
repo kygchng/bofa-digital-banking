@@ -1,0 +1,11 @@
+{
+  "name": "@bofa/ui-components",
+  "version": "14.3.4",
+  "description": "BofA shared UI component library — Angular Material + BofA Design System",
+  "peerDependencies": {
+    "@angular/common": "^14.0.0",
+    "@angular/core": "^14.0.0",
+    "@angular/material": "^14.0.0",
+    "@angular/cdk": "^14.0.0"
+  }
+}

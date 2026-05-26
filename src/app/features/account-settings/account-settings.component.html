@@ -1,0 +1,123 @@
+<div class="bofa-container">
+  <h1 class="page-title">Account Settings</h1>
+
+  <mat-tab-group [(selectedIndex)]="activeTab">
+
+    <!-- Profile Tab -->
+    <mat-tab label="Profile">
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="settings-form">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Personal Information</mat-card-title>
+            <mat-card-subtitle>Update your name and contact details</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <!-- Using bofa-form-field component (which internally uses appearance="legacy") -->
+            <bofa-form-field
+              label="First Name"
+              formControlName="firstName"
+              [errorMessage]="profileForm.get('firstName')?.hasError('required') ? 'First name is required' : ''">
+            </bofa-form-field>
+
+            <bofa-form-field
+              label="Last Name"
+              formControlName="lastName"
+              [errorMessage]="profileForm.get('lastName')?.hasError('required') ? 'Last name is required' : ''">
+            </bofa-form-field>
+
+            <!--
+              Direct mat-form-field usage with appearance="legacy".
+              appearance="legacy" removed in Angular Material 15 (MDC migration).
+              Must migrate to appearance="outline" — see MIGRATION_NOTES.md.
+            -->
+            <mat-form-field appearance="legacy" class="full-width">
+              <mat-label>Email Address</mat-label>
+              <input matInput type="email" formControlName="email" autocomplete="email" />
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="profileForm.get('email')?.hasError('email')">
+                Enter a valid email address
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy" class="full-width">
+              <mat-label>Phone Number</mat-label>
+              <input matInput type="tel" formControlName="phone" autocomplete="tel" />
+              <mat-icon matSuffix>phone</mat-icon>
+              <mat-hint>Used for MFA verification. Must match SSO-registered number.</mat-hint>
+              <mat-error *ngIf="profileForm.get('phone')?.hasError('pattern')">
+                Enter a valid phone number (10-15 digits)
+              </mat-error>
+            </mat-form-field>
+          </mat-card-content>
+
+          <mat-card-actions align="end">
+            <bofa-button
+              type="submit"
+              variant="primary"
+              [disabled]="isSaving || profileForm.invalid || profileForm.pristine">
+              {{ isSaving ? 'Saving…' : 'Save Profile' }}
+            </bofa-button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </mat-tab>
+
+    <!-- Notifications Tab -->
+    <mat-tab label="Notifications">
+      <form [formGroup]="notificationsForm" (ngSubmit)="saveNotifications()" class="settings-form">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Alert Preferences</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="toggle-group">
+              <mat-slide-toggle formControlName="emailAlerts">Email Alerts</mat-slide-toggle>
+              <mat-slide-toggle formControlName="smsAlerts">SMS Alerts</mat-slide-toggle>
+              <mat-slide-toggle formControlName="pushNotifications">
+                Push Notifications
+              </mat-slide-toggle>
+              <mat-divider></mat-divider>
+              <mat-slide-toggle formControlName="fraudAlerts" color="warn">
+                Fraud Alerts (Recommended)
+              </mat-slide-toggle>
+              <mat-slide-toggle formControlName="balanceAlerts">
+                Low Balance Alerts
+              </mat-slide-toggle>
+            </div>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <bofa-button type="submit" variant="primary">Save Preferences</bofa-button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </mat-tab>
+
+    <!-- Security Tab -->
+    <mat-tab label="Security">
+      <form [formGroup]="securityForm" class="settings-form">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Security Settings</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="mat-body-2">
+              MFA Method: <strong>{{ securityForm.get('mfaMethod')?.value | uppercase }}</strong>
+            </p>
+            <p class="mat-body-2">
+              Session Timeout: <strong>{{ securityForm.get('sessionTimeout')?.value }} minutes</strong>
+            </p>
+            <bofa-alert-banner
+              type="info"
+              message="MFA settings are managed through the BofA Enterprise SSO Gateway. Contact IT Security to change your MFA method.">
+            </bofa-alert-banner>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

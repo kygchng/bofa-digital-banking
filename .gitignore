@@ -1,0 +1,29 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+.npm
+
+# Angular build output
+dist/
+.angular/
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.project
+.classpath
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+*.tmp
+*.bak
