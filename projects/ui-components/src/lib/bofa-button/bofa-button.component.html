@@ -1,3 +1,7 @@
+<ng-template #buttonContent>
+  <ng-content></ng-content>
+</ng-template>
+
 <button
   mat-raised-button
   *ngIf="variant !== 'ghost'; else ghostBtn"
@@ -7,7 +11,7 @@
   [class.bofa-btn-sm]="size === 'sm'"
   [class.bofa-btn-lg]="size === 'lg'"
   [class.bofa-btn-full]="fullWidth">
-  <ng-content></ng-content>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </button>
 <ng-template #ghostBtn>
   <button
@@ -18,6 +22,6 @@
     [class.bofa-btn-sm]="size === 'sm'"
     [class.bofa-btn-lg]="size === 'lg'"
     [class.bofa-btn-full]="fullWidth">
-    <ng-content></ng-content>
+    <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
   </button>
 </ng-template>
