@@ -6,10 +6,8 @@ export type BofaFormFieldType = 'text' | 'password' | 'email' | 'number' | 'tel'
 /**
  * BofA Design System — Form Field Component
  *
- * Wraps Angular Material mat-form-field with BofA Design System v1.4 defaults.
- * Uses appearance="outline" per BofA UI Standards v2.0.
- * Migrated from appearance="legacy" as part of the Angular Material 15 MDC migration.
- * Reference: https://material.angular.io/guide/mdc-migration#form-field
+ * Wraps Angular Material mat-form-field with BofA Design System v2.0 defaults.
+ * Uses appearance="outline" per Angular Material 15+ MDC migration.
  */
 @Component({
   selector: 'bofa-form-field',
@@ -29,6 +27,7 @@ export class BofaFormFieldComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Input() type: BofaFormFieldType = 'text';
   @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
+  // floatLabel: 'auto' matches BofA Design System v2.0 label animation spec
   @Input() floatLabel: 'auto' | 'always' = 'auto';
 
   value = '';

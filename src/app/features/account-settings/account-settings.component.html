@@ -13,7 +13,7 @@
           </mat-card-header>
 
           <mat-card-content>
-
+            <!-- Using bofa-form-field component (appearance="outline") -->
             <bofa-form-field
               label="First Name"
               formControlName="firstName"
@@ -26,6 +26,7 @@
               [errorMessage]="profileForm.get('lastName')?.hasError('required') ? 'Last name is required' : ''">
             </bofa-form-field>
 
+            <!-- appearance="outline" per Angular Material 15+ MDC migration -->
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Email Address</mat-label>
               <input matInput type="email" formControlName="email" autocomplete="email" />

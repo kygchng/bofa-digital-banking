@@ -56,8 +56,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": { "browserTarget": "bofa-digital-banking:build:production" },
-            "development": { "browserTarget": "bofa-digital-banking:build:development" }
+            "production": { "buildTarget": "bofa-digital-banking:build:production" },
+            "development": { "buildTarget": "bofa-digital-banking:build:development" }
           },
           "defaultConfiguration": "development"
         },
@@ -112,5 +112,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
