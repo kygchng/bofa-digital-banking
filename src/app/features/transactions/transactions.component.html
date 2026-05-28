@@ -17,7 +17,7 @@
       <mat-chip-option
         *ngFor="let f of ['all', 'debit', 'credit', 'pending']"
         [selected]="activeFilter === f"
-        (selectionChange)="applyFilter($any(f))"
+        (selectionChange)="$event.selected && applyFilter($any(f))"
         color="primary">
         {{ f | titlecase }}
       </mat-chip-option>
@@ -45,9 +45,9 @@
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-chip-option color="accent" [disableRipple]="true" class="category-chip" [selectable]="false">
+        <mat-chip color="accent" [disableRipple]="true" class="category-chip">
           {{ row.category }}
-        </mat-chip-option>
+        </mat-chip>
       </mat-cell>
     </ng-container>
 
