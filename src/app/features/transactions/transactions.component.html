@@ -12,11 +12,11 @@
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
-    <mat-chip-listbox class="filter-chips" aria-label="Transaction filter">
+    <mat-chip-listbox class="filter-chips" aria-label="Transaction filter" [value]="activeFilter">
       <mat-chip-option
         *ngFor="let f of filterOptions"
-        [selected]="activeFilter === f"
-        (click)="applyFilter(f)"
+        [value]="f"
+        (selectionChange)="applyFilter(f)"
         color="primary">
         {{ f | titlecase }}
       </mat-chip-option>
@@ -44,9 +44,9 @@
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-chip color="accent" [disableRipple]="true" class="category-chip">
+        <mat-chip-option color="accent" [disableRipple]="true" class="category-chip" [selectable]="false">
           {{ row.category }}
-        </mat-chip>
+        </mat-chip-option>
       </mat-cell>
     </ng-container>
 

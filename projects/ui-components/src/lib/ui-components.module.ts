@@ -13,11 +13,6 @@ import { BofaAlertBannerModule } from './bofa-alert-banner/bofa-alert-banner.mod
  *   - business-portal
  *   - merrill-edge-web
  *   - employee-banking-portal
- *
- * Breaking change notice: Angular Material 15 removes the mat-form-field
- * `appearance="legacy"` value. All consumers must migrate simultaneously
- * with the library upgrade. Coordinate with downstream teams before releasing
- * a new major version of this library.
  */
 @NgModule({
   exports: [

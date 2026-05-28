@@ -1,5 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FloatLabelType } from '@angular/material/form-field';
 
 export type BofaFormFieldType = 'text' | 'password' | 'email' | 'number' | 'tel';
 
@@ -29,7 +30,7 @@ export class BofaFormFieldComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Input() type: BofaFormFieldType = 'text';
   @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
-  @Input() floatLabel: 'auto' | 'always' = 'auto';
+  @Input() floatLabel: FloatLabelType = 'auto';
 
   value = '';
   isDisabled = false;
