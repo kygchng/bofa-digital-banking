@@ -1,5 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FloatLabelType } from '@angular/material/form-field';
 
 export type BofaFormFieldType = 'text' | 'password' | 'email' | 'number' | 'tel';
 
@@ -9,10 +10,7 @@ export type BofaFormFieldType = 'text' | 'password' | 'email' | 'number' | 'tel'
  * Wraps Angular Material mat-form-field with BofA Design System v1.4 defaults.
  * Currently uses appearance="legacy" per BofA UI Standards v1.4.
  *
- * ⚠️  MIGRATION REQUIRED (Angular 15 upgrade):
- * `appearance="legacy"` was removed in Angular Material 15 as part of the MDC migration.
- * Migration path: change appearance to "outline" (per BofA DS v2.0) or "fill".
- * All four downstream consumers must be updated simultaneously.
+ * Migrated to appearance="outline" for Angular Material 15 MDC compatibility.
  * Reference: https://material.angular.io/guide/mdc-migration#form-field
  */
 @Component({
@@ -33,8 +31,7 @@ export class BofaFormFieldComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Input() type: BofaFormFieldType = 'text';
   @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
-  // floatLabel: 'auto' matches BofA Design System v1.4 label animation spec
-  @Input() floatLabel: 'auto' | 'always' | 'never' = 'auto';
+  @Input() floatLabel: FloatLabelType = 'auto';
 
   value = '';
   isDisabled = false;

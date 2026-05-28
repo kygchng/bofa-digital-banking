@@ -2,14 +2,7 @@
   <h1 class="page-title">Transaction History</h1>
 
   <div class="toolbar-row">
-    <!--
-      MIGRATION NOTE: appearance="legacy" is used here per BofA Design System v1.4.
-      This appearance value was removed in Angular Material 15 (MDC migration).
-      Must be updated to appearance="outline" or "fill" as part of Angular 15 upgrade.
-      Affects: this template and all usages within @bofa/ui-components.
-      Reference: https://material.angular.io/guide/mdc-migration
-    -->
-    <mat-form-field appearance="legacy" class="search-field">
+    <mat-form-field appearance="outline" class="search-field">
       <mat-label>Search transactions</mat-label>
       <input
         matInput
@@ -19,15 +12,15 @@
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
-    <mat-chip-list class="filter-chips" aria-label="Transaction filter">
-      <mat-chip
-        *ngFor="let f of ['all', 'debit', 'credit', 'pending']"
-        [selected]="activeFilter === f"
-        (click)="applyFilter(f)"
+    <mat-chip-listbox class="filter-chips" aria-label="Transaction filter" [value]="activeFilter">
+      <mat-chip-option
+        *ngFor="let f of filterOptions"
+        [value]="f"
+        (selectionChange)="applyFilter(f)"
         color="primary">
         {{ f | titlecase }}
-      </mat-chip>
-    </mat-chip-list>
+      </mat-chip-option>
+    </mat-chip-listbox>
   </div>
 
   <bofa-alert-banner *ngIf="errorMessage" type="error" [message]="errorMessage">
@@ -51,9 +44,9 @@
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-chip color="accent" [disableRipple]="true" class="category-chip">
+        <mat-chip-option color="accent" [disableRipple]="true" class="category-chip" [selectable]="false">
           {{ row.category }}
-        </mat-chip>
+        </mat-chip-option>
       </mat-cell>
     </ng-container>
 

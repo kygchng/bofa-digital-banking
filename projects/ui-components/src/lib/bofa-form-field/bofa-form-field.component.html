@@ -1,21 +1,5 @@
-<!--
-  BofA Design System v1.4 — Form Field
-  appearance="legacy" is set per BofA UI Standards v1.4.
-
-  ⚠️  BREAKING CHANGE in Angular Material 15:
-  appearance="legacy" has been REMOVED as part of the MDC component migration.
-  All usages of this component (and direct mat-form-field with appearance="legacy")
-  across all four downstream consumers must be migrated to appearance="outline"
-  before this library can be upgraded to Angular 15.
-
-  Files affected:
-    - projects/ui-components/src/lib/bofa-form-field/bofa-form-field.component.html  ← HERE
-    - src/app/features/transactions/transactions.component.html
-    - src/app/features/account-settings/account-settings.component.html
-  Migration: replace appearance="legacy" with appearance="outline"
--->
 <mat-form-field
-  appearance="legacy"
+  appearance="outline"
   [floatLabel]="floatLabel"
   [color]="color"
   class="bofa-form-field">

@@ -1,5 +1,4 @@
 import {
-  ComponentFactoryResolver,
   ComponentRef,
   Injectable,
   Type,
@@ -29,14 +28,9 @@ export interface AnalyticsEvent {
 /**
  * Integrates with BofA Analytics SDK v3.2 for behavioral tracking.
  *
- * ComponentFactoryResolver is used here to dynamically instantiate
- * feature-flag-driven overlay components at runtime. This is required
- * by the BofA Feature Flags SDK v2.1 (BoA-Flags), which injects
- * A/B test variant components via ViewContainerRef without static imports.
- *
- * NOTE: ComponentFactoryResolver is deprecated in Angular 13 and
- * removed in Angular 15. Migration to ViewContainerRef.createComponent()
- * direct API is required as part of the Angular 15 upgrade.
+ * Dynamically instantiates feature-flag-driven overlay components at runtime
+ * via ViewContainerRef.createComponent() (migrated from the deprecated
+ * ComponentFactoryResolver API removed in Angular 15).
  * See: https://angular.io/guide/deprecations#componentfactoryresolver
  */
 @Injectable({ providedIn: 'root' })
@@ -45,7 +39,6 @@ export class AnalyticsService {
   private sessionStart = Date.now();
 
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
     private router: Router,
   ) {
     this.initPageTracking();
@@ -58,7 +51,7 @@ export class AnalyticsService {
         accountType,
         segment,
         platform: 'web',
-        appVersion: '14.3.4',
+        appVersion: '15.0.0',
       });
     });
   }
@@ -93,17 +86,15 @@ export class AnalyticsService {
    * Used by the BofA Feature Flags SDK (BoA-Flags v2.1) to inject A/B test
    * variant components without static module imports.
    *
-   * MIGRATION NOTE (Angular 15): Replace with:
-   *   const ref = container.createComponent(component);
-   * and remove ComponentFactoryResolver from the constructor.
+   * Migrated from ComponentFactoryResolver to ViewContainerRef.createComponent()
+   * direct API per Angular 15 deprecation guide.
    */
   renderFeatureComponent<T>(
     container: ViewContainerRef,
     component: Type<T>,
     inputs: Partial<T> = {},
   ): ComponentRef<T> {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(component);
-    const ref = container.createComponent(factory);
+    const ref = container.createComponent(component);
     Object.assign(ref.instance as object, inputs);
     ref.changeDetectorRef.detectChanges();
     return ref;

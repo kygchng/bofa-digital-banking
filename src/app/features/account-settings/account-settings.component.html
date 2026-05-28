@@ -26,12 +26,7 @@
               [errorMessage]="profileForm.get('lastName')?.hasError('required') ? 'Last name is required' : ''">
             </bofa-form-field>
 
-            <!--
-              Direct mat-form-field usage with appearance="legacy".
-              appearance="legacy" removed in Angular Material 15 (MDC migration).
-              Must migrate to appearance="outline" — see MIGRATION_NOTES.md.
-            -->
-            <mat-form-field appearance="legacy" class="full-width">
+            <mat-form-field appearance="outline" class="full-width">
               <mat-label>Email Address</mat-label>
               <input matInput type="email" formControlName="email" autocomplete="email" />
               <mat-icon matSuffix>email</mat-icon>
@@ -43,7 +38,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="legacy" class="full-width">
+            <mat-form-field appearance="outline" class="full-width">
               <mat-label>Phone Number</mat-label>
               <input matInput type="tel" formControlName="phone" autocomplete="tel" />
               <mat-icon matSuffix>phone</mat-icon>

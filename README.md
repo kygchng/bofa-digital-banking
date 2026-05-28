@@ -7,9 +7,9 @@ serving millions of retail banking customers across checking, savings, and credi
 
 | Item | Status |
 |------|--------|
-| Angular Version | **14.3.x ⚠️ END OF LIFE (Nov 18, 2023)** |
-| Angular Material | **14.x ⚠️ EOL** |
-| Security policy compliance | **NON-COMPLIANT** |
+| Angular Version | **15.2.x** (migration in progress → target 18) |
+| Angular Material | **15.x** (MDC migration complete) |
+| Security policy compliance | **IN PROGRESS** (target: Angular 18) |
 | Downstream teams consuming `@bofa/ui-components` | **4 teams** |
 | Migration target | Angular 18 |
 | Compliance deadline | Q2 2025 (**OVERDUE**) |
@@ -35,7 +35,7 @@ bofa-digital-banking/
     └── ui-components/            # @bofa/ui-components — shared component library
         └── src/lib/
             ├── bofa-button/
-            ├── bofa-form-field/  # ⚠️ Uses deprecated Angular Material legacy API
+            ├── bofa-form-field/  # Migrated to appearance="outline" (MDC)
             ├── bofa-data-table/
             └── bofa-alert-banner/
 ```
@@ -90,10 +90,10 @@ any consuming application can be upgraded. All four teams' CI must remain green.
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend framework | Angular 14 (target: 18) |
-| UI components | Angular Material 14 + BofA Design System |
+| Frontend framework | Angular 15 (target: 18) |
+| UI components | Angular Material 15 (MDC) + BofA Design System |
 | State | RxJS / BehaviorSubjects |
 | Auth | BofA Enterprise SSO Gateway (SAML 2.0 / OIDC) |
 | Analytics | BofA Analytics SDK v3.2 (proprietary) |
-| Build | Angular CLI 14 / ng-packagr |
-| Language | TypeScript 4.7 |
+| Build | Angular CLI 15 / ng-packagr |
+| Language | TypeScript 4.9 |
