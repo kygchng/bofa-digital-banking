@@ -16,7 +16,7 @@
       <mat-chip-option
         *ngFor="let f of filterOptions"
         [selected]="activeFilter === f"
-        (click)="applyFilter(f)"
+        (click)="applyFilter($any(f))"
         color="primary">
         {{ f | titlecase }}
       </mat-chip-option>
@@ -67,8 +67,8 @@
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
+    <tr class="mat-mdc-row" *matNoDataRow>
+      <td class="mat-mdc-cell no-data" [attr.colspan]="displayedColumns.length">
         No transactions match your search.
       </td>
     </tr>
