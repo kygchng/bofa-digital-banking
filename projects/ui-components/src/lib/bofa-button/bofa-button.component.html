@@ -1,6 +1,6 @@
 <button
-  [attr.mat-raised-button]="variant !== 'ghost' ? '' : null"
-  [attr.mat-button]="variant === 'ghost' ? '' : null"
+  mat-raised-button
+  *ngIf="variant !== 'ghost'; else ghostBtn"
   [color]="matColor"
   [disabled]="disabled"
   [type]="type"
@@ -9,3 +9,15 @@
   [class.bofa-btn-full]="fullWidth">
   <ng-content></ng-content>
 </button>
+<ng-template #ghostBtn>
+  <button
+    mat-button
+    [color]="matColor"
+    [disabled]="disabled"
+    [type]="type"
+    [class.bofa-btn-sm]="size === 'sm'"
+    [class.bofa-btn-lg]="size === 'lg'"
+    [class.bofa-btn-full]="fullWidth">
+    <ng-content></ng-content>
+  </button>
+</ng-template>

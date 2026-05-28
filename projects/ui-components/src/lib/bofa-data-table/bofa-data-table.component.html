@@ -14,8 +14,8 @@
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: stickyHeader"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell no-data-cell" [attr.colspan]="displayedColumns.length">
+    <tr class="mat-mdc-row" *matNoDataRow>
+      <td class="mat-mdc-cell no-data-cell" [attr.colspan]="displayedColumns.length">
         <span *ngIf="!isLoading">{{ emptyMessage }}</span>
       </td>
     </tr>

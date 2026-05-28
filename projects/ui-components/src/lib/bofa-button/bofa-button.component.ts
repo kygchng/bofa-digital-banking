@@ -20,7 +20,5 @@ export class BofaButtonComponent {
     return undefined;
   }
 
-  get matButtonType(): string {
-    return this.variant === 'ghost' ? 'mat-button' : 'mat-raised-button';
-  }
+
 }
