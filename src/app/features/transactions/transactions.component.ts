@@ -33,7 +33,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   isLoading = true;
   errorMessage: string | null = null;
   activeFilter: TransactionFilter = 'all';
-  filterOptions: TransactionFilter[] = ['all', 'debit', 'credit', 'pending'];
+  readonly filterOptions: TransactionFilter[] = ['all', 'debit', 'credit', 'pending'];
 
   private destroy$ = new Subject<void>();
 
