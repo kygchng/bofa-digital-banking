@@ -1,0 +1,40 @@
+.toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.search-field {
+  flex: 1;
+}
+
+.transactions-table {
+  width: 100%;
+}
+
+.debit {
+  color: #c62828;
+}
+
+.credit {
+  color: #2e7d32;
+}
+
+.status-posted {
+  color: #2e7d32;
+}
+
+.status-pending {
+  color: #f57c00;
+}
+
+.status-declined {
+  color: #c62828;
+}
+
+.no-data {
+  text-align: center;
+  padding: 24px;
+  color: rgba(0, 0, 0, 0.54);
+}
