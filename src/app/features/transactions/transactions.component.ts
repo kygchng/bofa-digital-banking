@@ -19,7 +19,7 @@ export interface Transaction {
   accountId: string;
 }
 
-type TransactionFilter = 'all' | 'debit' | 'credit' | 'pending';
+export type TransactionFilter = 'all' | 'debit' | 'credit' | 'pending';
 
 @Component({
   selector: 'bofa-transactions',

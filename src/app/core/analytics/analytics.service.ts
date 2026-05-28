@@ -28,10 +28,9 @@ export interface AnalyticsEvent {
 /**
  * Integrates with BofA Analytics SDK v3.2 for behavioral tracking.
  *
- * Dynamically instantiates feature-flag-driven overlay components at runtime
- * via ViewContainerRef.createComponent() (migrated from the deprecated
- * ComponentFactoryResolver API removed in Angular 15).
- * See: https://angular.io/guide/deprecations#componentfactoryresolver
+ * Uses ViewContainerRef.createComponent() direct API to dynamically
+ * instantiate feature-flag-driven overlay components at runtime, as
+ * required by the BofA Feature Flags SDK v2.1 (BoA-Flags).
  */
 @Injectable({ providedIn: 'root' })
 export class AnalyticsService {
@@ -81,14 +80,6 @@ export class AnalyticsService {
     this.track({ name: event, category: 'auth' });
   }
 
-  /**
-   * Dynamically renders a feature-flag-driven component into a host container.
-   * Used by the BofA Feature Flags SDK (BoA-Flags v2.1) to inject A/B test
-   * variant components without static module imports.
-   *
-   * Migrated from ComponentFactoryResolver to ViewContainerRef.createComponent()
-   * direct API per Angular 15 deprecation guide.
-   */
   renderFeatureComponent<T>(
     container: ViewContainerRef,
     component: Type<T>,

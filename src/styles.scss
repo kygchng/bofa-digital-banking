@@ -1,5 +1,5 @@
 // BofA Design System — Global Styles v2.0
-// Angular Material theming with BofA brand palette (MDC-based — Angular Material 15)
+// Angular Material theming with BofA brand palette (MDC-based, Angular Material 15+)
 
 @use '@angular/material' as mat;
 
@@ -59,7 +59,7 @@ body {
   margin-bottom: 24px;
 }
 
-// Card spacing (MDC class prefix)
+// Card spacing
 .mat-mdc-card + .mat-mdc-card {
   margin-top: 16px;
 }

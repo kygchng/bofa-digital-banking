@@ -8,9 +8,8 @@ export type BofaFormFieldType = 'text' | 'password' | 'email' | 'number' | 'tel'
  * BofA Design System — Form Field Component
  *
  * Wraps Angular Material mat-form-field with BofA Design System v1.4 defaults.
- * Currently uses appearance="legacy" per BofA UI Standards v1.4.
- *
- * Migrated to appearance="outline" for Angular Material 15 MDC compatibility.
+ * Uses appearance="outline" per BofA UI Standards v2.0.
+ * Migrated from appearance="legacy" as part of the Angular Material 15 MDC migration.
  * Reference: https://material.angular.io/guide/mdc-migration#form-field
  */
 @Component({
