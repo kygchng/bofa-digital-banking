@@ -2,6 +2,7 @@
   <h1 class="page-title">Transaction History</h1>
 
   <div class="toolbar-row">
+    <!-- appearance="outline" per Angular Material 15+ MDC migration -->
     <mat-form-field appearance="outline" class="search-field">
       <mat-label>Search transactions</mat-label>
       <input
@@ -14,9 +15,9 @@
 
     <mat-chip-listbox class="filter-chips" aria-label="Transaction filter">
       <mat-chip-option
-        *ngFor="let f of filterOptions"
+        *ngFor="let f of ['all', 'debit', 'credit', 'pending']"
         [selected]="activeFilter === f"
-        (click)="applyFilter(f)"
+        (selectionChange)="$event.selected && applyFilter($any(f))"
         color="primary">
         {{ f | titlecase }}
       </mat-chip-option>
